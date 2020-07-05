@@ -1,10 +1,11 @@
-<table border="1">
-  <thead>
+<table class="table table-hover">
+  <thead class="thead-dark">
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
       <th>Email</th>
       <th>Sales Volume</th>
+      <th>Met Quota?</th>
     </tr>
   </thead>
   <tbody>
@@ -12,7 +13,13 @@
       <td>{{ salesPerson.firstName }}</td>
       <td>{{ salesPerson.lastName }}</td>
       <td>{{ salesPerson.email }}</td>
-      <td>{{ salesPerson.salesVolume }}</td>
+      <td>{{ salesPerson.salesVolume | currency: "USD" }}</td>
+      <td>
+        <div *ngIf="salesPerson.salesVolume >= 60000; else elseContent">
+          Yes
+        </div>
+        <ng-template #elseContent>No</ng-template>
+      </td>
     </tr>
   </tbody>
 </table>
